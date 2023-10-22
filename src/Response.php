@@ -321,6 +321,16 @@ class Response
     }
 
     /**
+     * Get the slip payload.
+     *
+     * @return string
+     */
+    public function getPayload(): string
+    {
+        return $this->data['payload'];
+    }
+
+    /**
      * Get the transaction reference.
      *
      * @return string
