@@ -5,7 +5,6 @@ namespace M4h45amu7x;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Utils;
-use M4h45amu7x\Response;
 use M4h45amu7x\exceptions\VerifyException;
 
 require 'vendor/autoload.php';
@@ -30,10 +29,10 @@ class EasySlip
      * Verifies the slip by payload using the EasySlip API.
      *
      * @param string $payload - The data payload to be verified.
-     * @return Response - The verification result.
+     * @return array - The verification result.
      * @throws EasySlipVerifyError - If the verification request fails.
      */
-    public function verifyByPayload(string $payload): Response
+    public function verifyByPayload(string $payload): array
     {
         try {
             $client = new Client();
@@ -47,9 +46,7 @@ class EasySlip
                 'verify' => false
             ]);
 
-            $data = json_decode($response->getBody(), true);
-
-            return new Response($data['status'], $data['data']);
+            return json_decode($response->getBody(), true);
         } catch (RequestException $error) {
             if ($error->hasResponse()) {
                 $responseData = json_decode($error->getResponse()->getBody()->getContents(), true);
@@ -64,10 +61,10 @@ class EasySlip
      * Verifies the slip by image file using the EasySlip API.
      *
      * @param string $imagePath - The image to be verified.
-     * @return Response - The verification result.
+     * @return array - The verification result.
      * @throws EasySlipVerifyError - If the verification request fails.
      */
-    public function verifyByImage(string $imagePath): Response
+    public function verifyByImage(string $imagePath): array
     {
         try {
             $client = new Client();
@@ -84,9 +81,7 @@ class EasySlip
                 'verify' => false
             ]);
 
-            $data = json_decode($response->getBody(), true);
-
-            return new Response($data['status'], $data['data']);
+            return json_decode($response->getBody(), true);
         } catch (RequestException $error) {
             if ($error->hasResponse()) {
                 $responseData = json_decode($error->getResponse()->getBody()->getContents(), true);

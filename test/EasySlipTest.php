@@ -12,7 +12,7 @@ class EasySlipTest extends TestCase
         $slip = new EasySlip('TEST');
         $result = $slip->verifyByPayload('TEST');
 
-        $this->assertEquals(200, $result->getStatus());
+        $this->assertEquals(200, $result['status']);
     }
 
     public function testVerifyฺByImage()
@@ -20,6 +20,6 @@ class EasySlipTest extends TestCase
         $slip = new EasySlip('TEST');
         $result = $slip->verifyByImage('test/images/qrcode.jpg');
 
-        $this->assertEquals(200, $result->getStatus());
+        $this->assertEquals(200, $result['status']);
     }
 }
